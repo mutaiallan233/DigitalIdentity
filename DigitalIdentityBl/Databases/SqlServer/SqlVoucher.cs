@@ -18,8 +18,8 @@ namespace DigitalIdentity.Data.Databases.SqlServer
 
         public VoucherContext CreateVoucher(VoucherContext voucherContext)
         {
-            //var location = _sqlLocation.GetLocation(voucherContext.LocationRefId);
-           // voucherContext.Location = location;
+            voucherContext.Id = Guid.NewGuid();
+
             _sqlServerDb.Vouchers!.Add(voucherContext!);
             _sqlServerDb.SaveChanges();
 
@@ -48,10 +48,8 @@ namespace DigitalIdentity.Data.Databases.SqlServer
             var existingVoucher = _sqlServerDb.Locations.Find(voucherContext.Id);
 
             if (existingVoucher != null)
-            {
-                //existingVoucher.Name = voucherContext.Name;
-                //existingVoucher.AdministrativeArea = location.AdministrativeArea;
-                _sqlServerDb.Vouchers.Update(voucherContext);
+            {              
+                _sqlServerDb.Vouchers!.Update(voucherContext);
                 _sqlServerDb.SaveChanges();
             }
             return voucherContext;

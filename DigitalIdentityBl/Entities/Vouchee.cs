@@ -26,7 +26,6 @@ namespace DigitalIdentityBl.Models
         public VoucherContext? VoucherContext { get; set; }
 
         [Required]
-
         public string? PhotoUrl { get; set; }
 
         public string? Voice { get; set; }

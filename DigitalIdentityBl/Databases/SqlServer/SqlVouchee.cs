@@ -1,33 +1,58 @@
-﻿using DigitalIdentity.Data.Databases.Interfaces;
-using DigitalIdentityBl.Models;
+﻿using DigitalIdentity.Data.Databases.Contexts;
+using DigitalIdentity.Data.Databases.Interfaces;
+using DigitalIdentity.Data.Databases.SqlServer.DbContexts;
+
 
 namespace DigitalIdentity.Data.Databases.SqlServer
 {
     public class SqlVouchee : ISqlVouchee
     {
-        public Vouchee CreateVouchee(Vouchee Vouchee)
+        private SqlServerDb _sqlServerDb;
+
+        public SqlVouchee(SqlServerDb sqlServerDb)
         {
-            throw new NotImplementedException();
+            _sqlServerDb = sqlServerDb;
         }
 
-        public void DeleteVouchee(Vouchee Vouchee)
+        public VoucheeContext CreateVouchee(VoucheeContext voucheeContext)
         {
-            throw new NotImplementedException();
+            voucheeContext.Id = Guid.NewGuid();
+
+            _sqlServerDb.Vouchees!.Add(voucheeContext);
+            _sqlServerDb.SaveChanges();
+
+            return voucheeContext;
+        }
+             
+        public string DeleteVouchee(VoucheeContext voucheeContext)
+        {
+            _sqlServerDb.Vouchees!.Remove(voucheeContext);
+            _sqlServerDb.SaveChanges();
+
+            return "Deleted Successfully!";
         }
 
-        public List<Vouchee> GetAllVouchees()
+        public List<VoucheeContext> GetAllVouchees()
         {
-            throw new NotImplementedException();
+            return _sqlServerDb.Vouchees!.ToList();
         }
 
-        public Vouchee GetVouchee(Guid id)
+        public VoucheeContext GetVouchee(Guid id)
         {
-            throw new NotImplementedException();
+            return _sqlServerDb.Vouchees!.Find(id)!;          
         }
 
-        public Vouchee UpdateVouchee(Vouchee Vouchee)
+        public VoucheeContext UpdateVouchee(VoucheeContext voucheeContext)
         {
-            throw new NotImplementedException();
+            var existingVouchee = _sqlServerDb.Vouchees!.Find(voucheeContext.Id);
+            if (existingVouchee != null)
+            {
+                _sqlServerDb.Vouchees!.Update(voucheeContext);
+                _sqlServerDb.SaveChanges();
+            }
+            return voucheeContext;
         }
+
+        
     }
 }

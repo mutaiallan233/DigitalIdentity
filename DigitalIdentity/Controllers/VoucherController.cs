@@ -16,7 +16,7 @@ namespace DigitalIdentity.Api.Controllers
             _sqlVoucher = sqlVoucher;
         }
 
-        [HttpGet("get-all")]
+        [HttpGet("get-allVouchers")]
         public IActionResult GetAllVouchers()
         {
            return Ok(_sqlVoucher.GetAllVouchers());
@@ -48,9 +48,7 @@ namespace DigitalIdentity.Api.Controllers
             if (existingVoucher != null)
             {
                 voucherContext.Id = existingVoucher.Id;
-                //voucherContext.Name = location.Name == null ? existingVoucher.Name : location.Name;
-               // voucherContext.AdministrativeArea = location.AdministrativeArea == null ? existingVoucher.AdministrativeArea : location.AdministrativeArea;
-
+                
                 _sqlVoucher.UpdateVoucher(voucherContext);
                 return Ok($"Voucher with id: {id} was updated successfully");
             }
@@ -63,7 +61,7 @@ namespace DigitalIdentity.Api.Controllers
             var voucher = _sqlVoucher.GetVoucher(Id);
             if( voucher == null)
             {
-                return NotFound("Cannot delete missing voucher!");
+                return NotFound($"Cannot delete missing voucher! id: {Id}");
             }
             _sqlVoucher.DeleteVoucher(voucher);
           return Ok("Deleted Successfully");

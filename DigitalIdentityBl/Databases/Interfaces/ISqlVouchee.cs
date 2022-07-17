@@ -1,13 +1,14 @@
-﻿using DigitalIdentityBl.Models;
+﻿using DigitalIdentity.Data.Databases.Contexts;
+
 
 namespace DigitalIdentity.Data.Databases.Interfaces
 {
     public interface ISqlVouchee
     {
-        List<Vouchee> GetAllVouchees();
-        Vouchee GetVouchee(Guid id);
-        void DeleteVouchee(Vouchee vouchee);
-        Vouchee UpdateVouchee(Vouchee vouchee);
-        Vouchee CreateVouchee(Vouchee vouchee);
+        List<VoucheeContext> GetAllVouchees();
+        VoucheeContext GetVouchee(Guid id);
+        string DeleteVouchee(VoucheeContext voucheeContext);
+        VoucheeContext UpdateVouchee(VoucheeContext voucheeContext);
+        VoucheeContext CreateVouchee(VoucheeContext voucheeContext);
     }
 }

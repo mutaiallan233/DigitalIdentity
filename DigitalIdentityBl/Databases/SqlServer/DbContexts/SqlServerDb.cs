@@ -11,7 +11,14 @@ namespace DigitalIdentity.Data.Databases.SqlServer.DbContexts
 
         }
 
-       public DbSet<Location>? Locations { get; set; }
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+                .EnableSensitiveDataLogging()
+                .UseSqlServer(@"Server=PAULELEGANT\\SQLEXPRESS;database=DigitalIdentityDb;Trusted_Connection=true");
+        }*/
+
+        public DbSet<Location>? Locations { get; set; }
        public DbSet<VoucherContext>? Vouchers { get; set; }
        public DbSet<VoucheeContext>? Vouchees { get; set; }
     }
