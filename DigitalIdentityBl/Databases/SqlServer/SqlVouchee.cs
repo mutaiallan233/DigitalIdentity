@@ -17,7 +17,7 @@ namespace DigitalIdentity.Data.Databases.SqlServer
         public VoucheeContext CreateVouchee(VoucheeContext voucheeContext)
         {
             voucheeContext.Id = Guid.NewGuid();
-
+            voucheeContext.DateCreated = DateTime.Now;
             _sqlServerDb.Vouchees!.Add(voucheeContext);
             _sqlServerDb.SaveChanges();
 

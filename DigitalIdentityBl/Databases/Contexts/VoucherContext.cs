@@ -7,6 +7,6 @@ namespace DigitalIdentity.Data.Databases.Contexts
     public class VoucherContext : Voucher
     {
         [JsonIgnore]
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; }
     }
 }

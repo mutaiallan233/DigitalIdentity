@@ -9,28 +9,22 @@ namespace DigitalIdentity.Data.Entities
         [Key]
         //[JsonIgnore]
         public Guid Id { get; set; }
-        [Required]
         public string? FirstName { get; set; }
-        [Required]
 
         public string? LastName { get; set; }
-        [Required]
 
         public string? Designation { get; set; }
-        [Required]
 
         public string? IdNumber { get; set; }
-        [Required]
 
         public string? Phone { get; set; }
-        [Required]
+        
         // Foreign key to Location
         [ForeignKey("Location")]
         public Guid LocationRefId { get; set; }
         [JsonIgnore]
         public  Location? Location { get; set; }
 
-        [Required]
         public Gender gender { get; set; }
         public string? PhotoUrl { get; set; }
     }

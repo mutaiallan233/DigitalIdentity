@@ -8,7 +8,7 @@ namespace DigitalIdentity.Data.Databases.Contexts
     {
 
         
-        public DateTime DateCreated { get; set; } = DateTime.Now;
+        public DateTime DateCreated { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DigitalId { get; set; }

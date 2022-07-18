@@ -19,7 +19,7 @@ namespace DigitalIdentity.Data.Databases.SqlServer
         public VoucherContext CreateVoucher(VoucherContext voucherContext)
         {
             voucherContext.Id = Guid.NewGuid();
-
+            voucherContext.DateCreated = DateTime.Now;
             _sqlServerDb.Vouchers!.Add(voucherContext!);
             _sqlServerDb.SaveChanges();
 
@@ -45,13 +45,9 @@ namespace DigitalIdentity.Data.Databases.SqlServer
 
         public VoucherContext UpdateVoucher(VoucherContext voucherContext)
         {
-            var existingVoucher = _sqlServerDb.Locations.Find(voucherContext.Id);
-
-            if (existingVoucher != null)
-            {              
-                _sqlServerDb.Vouchers!.Update(voucherContext);
-                _sqlServerDb.SaveChanges();
-            }
+                    
+             _sqlServerDb.Vouchers!.Update(voucherContext);
+             _sqlServerDb.SaveChanges();
             return voucherContext;
         }
     }
