@@ -1,16 +1,21 @@
-﻿using DigitalIdentity.Data.Databases.Interfaces;
+﻿using DigitalIdentity.App.Business.Abstract;
 using DigitalIdentity.Data.Databases.SqlServer.DbContexts;
 using DigitalIdentity.Data.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DigitalIdentity.Data.Databases.SqlServer
+namespace DigitalIdentity.App.Business.Managers
 {
-    public class SqlLocation : ISqlLocation
+    public class LocationManager : ILocation
     {
         private SqlServerDb _sqlServerDb;
 
-        public SqlLocation(SqlServerDb sqlServerDb)
+        public LocationManager(SqlServerDb sqlServerDb)
         {
-            this._sqlServerDb = sqlServerDb;
+            _sqlServerDb = sqlServerDb;
         }
 
         public Location CreateLocation(Location location)
@@ -52,6 +57,5 @@ namespace DigitalIdentity.Data.Databases.SqlServer
             }
             return location;
         }
-
     }
 }

@@ -1,5 +1,6 @@
-﻿using DigitalIdentity.Data.Databases.Contexts;
+﻿
 using DigitalIdentity.Data.Entities;
+using DigitalIdentityBl.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace DigitalIdentity.Data.Databases.SqlServer.DbContexts
@@ -19,7 +20,7 @@ namespace DigitalIdentity.Data.Databases.SqlServer.DbContexts
         }*/
 
         public DbSet<Location>? Locations { get; set; }
-       public DbSet<VoucherContext>? Vouchers { get; set; }
-       public DbSet<VoucheeContext>? Vouchees { get; set; }
+       public DbSet<Voucher>? Vouchers { get; set; }
+       public DbSet<Vouchee>? Vouchees { get; set; }
     }
 }

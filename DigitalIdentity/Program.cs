@@ -1,4 +1,5 @@
-using DigitalIdentity.Data.Databases.Interfaces;
+using DigitalIdentity.App.Business.Abstract;
+using DigitalIdentity.App.Business.Managers;
 using DigitalIdentity.Data.Databases.SqlServer;
 using DigitalIdentity.Data.Databases.SqlServer.DbContexts;
 using Microsoft.EntityFrameworkCore;
@@ -12,9 +13,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ISqlLocation, SqlLocation>();
-builder.Services.AddScoped<ISqlVoucher, SqlVoucher>();
-builder.Services.AddScoped<ISqlVouchee, SqlVouchee>();
+builder.Services.AddScoped<ILocation, LocationManager>();
+builder.Services.AddScoped<IVoucher, VoucherManager>();
+builder.Services.AddScoped<IVouchee, VoucheeManager>();
+
 
 //TODO: i shouldn't assign the business logic to the start, how will i manage this error
 builder.Services.AddDbContextPool<SqlServerDb>
