@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalIdentity.Data.Migrations
 {
     [DbContext(typeof(SqlServerDb))]
-    [Migration("20220719132246_initial-migration")]
-    partial class initialmigration
+    [Migration("20220720103300_digitalidinclude1")]
+    partial class digitalidinclude1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,37 +44,15 @@ namespace DigitalIdentity.Data.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("DigitalIdentity.Data.Entities.Photos", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("VoucherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("VoucherId");
-
-                    b.ToTable("Photos");
-                });
-
             modelBuilder.Entity("DigitalIdentity.Data.Entities.Voucher", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Connection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
@@ -100,6 +78,10 @@ namespace DigitalIdentity.Data.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PhotoUrls")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("gender")
                         .HasColumnType("int");
 
@@ -116,17 +98,26 @@ namespace DigitalIdentity.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Connection")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("DigitalId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Dob")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
@@ -134,25 +125,27 @@ namespace DigitalIdentity.Data.Migrations
                     b.Property<string>("Nationality")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ParentIds")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhotoUrl")
+                    b.Property<string>("PhotoUrls")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Voice")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid?>("VoucherId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("VoucherRefId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("gender")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.ToTable("Vouchees");
-                });
+                    b.HasIndex("VoucherId");
 
-            modelBuilder.Entity("DigitalIdentity.Data.Entities.Photos", b =>
-                {
-                    b.HasOne("DigitalIdentity.Data.Entities.Voucher", null)
-                        .WithMany("PhotoUrl")
-                        .HasForeignKey("VoucherId");
+                    b.ToTable("Vouchees");
                 });
 
             modelBuilder.Entity("DigitalIdentity.Data.Entities.Voucher", b =>
@@ -164,9 +157,13 @@ namespace DigitalIdentity.Data.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("DigitalIdentity.Data.Entities.Voucher", b =>
+            modelBuilder.Entity("DigitalIdentityBl.Models.Vouchee", b =>
                 {
-                    b.Navigation("PhotoUrl");
+                    b.HasOne("DigitalIdentity.Data.Entities.Voucher", "Voucher")
+                        .WithMany()
+                        .HasForeignKey("VoucherId");
+
+                    b.Navigation("Voucher");
                 });
 #pragma warning restore 612, 618
         }

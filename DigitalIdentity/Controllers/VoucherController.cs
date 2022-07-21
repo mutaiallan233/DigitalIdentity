@@ -50,7 +50,7 @@ namespace DigitalIdentity.Api.Controllers
             if (existingVoucher != null)
             {
                 //existingVoucher.PhotoUrl = string.IsNullOrEmpty(voucher.PhotoUrl) ? existingVoucher.PhotoUrl : voucher.PhotoUrl;
-                existingVoucher.PhotoUrl =  existingVoucher.PhotoUrl ?? voucher.PhotoUrl;
+               // existingVoucher.PhotoUrl =  existingVoucher.PhotoUrl ?? voucher.PhotoUrl;
 
                 existingVoucher.Phone = string.IsNullOrEmpty(voucher.Phone) ? existingVoucher.Phone : voucher.Phone;
                 existingVoucher.gender = string.IsNullOrEmpty(voucher.gender.ToString()) ? existingVoucher.gender : voucher.gender;

@@ -14,6 +14,6 @@ namespace DigitalIdentity.App.Business.Abstract
         void DeleteVouchee(Vouchee vouchee);
         Vouchee UpdateVouchee(Vouchee vouchee);
         Vouchee CreateVouchee(Vouchee vouchee);
-
+        int GetLastVouchee();
     }
 }

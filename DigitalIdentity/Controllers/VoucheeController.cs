@@ -41,29 +41,22 @@ namespace DigitalIdentity.Api.Controllers
         [HttpPatch("{id}")]
         public IActionResult UpdateVouchee(Guid id, Vouchee vouchee)
         {
-            //var existingVoucher = _vouchee.GetVouchee(id);
-            /*if(existingVouchee != null)
+            var existingVouchee = _vouchee.GetVouchee(id);
+            if (existingVouchee != null)
             {
-                voucheeContext.Id = existingVouchee.Id;
+                existingVouchee.Voice = string.IsNullOrEmpty(vouchee.Voice) ? existingVouchee.Voice : vouchee.Voice;
+                existingVouchee.PhotoUrls = (vouchee.photos.Count < 1) ? existingVouchee.PhotoUrls : vouchee.PhotoUrls;
+                existingVouchee.VoucherRefId = (vouchee.VoucherRefId == default(Guid)) ? existingVouchee.VoucherRefId : vouchee.VoucherRefId;
+                existingVouchee.gender = string.IsNullOrEmpty(vouchee.gender.ToString()) ? existingVouchee.gender : vouchee.gender;
+                existingVouchee.Dob = (vouchee.Dob == default(DateTime)) ? existingVouchee.Dob : vouchee.Dob;
+                existingVouchee.FirstName = string.IsNullOrEmpty(vouchee.FirstName) ? existingVouchee.FirstName : vouchee.FirstName;
+                existingVouchee.LastName = string.IsNullOrEmpty(vouchee.LastName) ? existingVouchee.LastName : vouchee.LastName;
+                existingVouchee.Nationality = string.IsNullOrEmpty(vouchee.Nationality) ? existingVouchee.Nationality : vouchee.Nationality;
+                existingVouchee.Connection = (vouchee.Connections.Count < 1) ? existingVouchee.Connection : vouchee.Connection;
 
-                _vouchee.UpdateVouchee(voucheeContext);
-                return Ok($"Voucher with id:{id} was updated successfully");
-            }*/
-            //if (existingVoucher != null)
-            //{
-                //existingVouchee.PhotoUrl = string.IsNullOrEmpty(voucherContext.PhotoUrl) ? existingVoucher.PhotoUrl : voucherContext.PhotoUrl;
-                //existingVoucher.PhotoUrl = existingVoucher.PhotoUrl ?? vouchee.PhotoUrl;
-
-               // existingVoucher.Phone = string.IsNullOrEmpty(voucherContext.Phone) ? existingVoucher.Phone : voucherContext.Phone;
-               // existingVoucher.gender = string.IsNullOrEmpty(voucherContext.gender.ToString()) ? existingVoucher.gender : voucherContext.gender;
-                //existingVoucher.Designation = string.IsNullOrEmpty(voucherContext.Designation) ? existingVoucher.Designation : voucherContext.Designation;
-                //existingVoucher.FirstName = string.IsNullOrEmpty(vouchee.FirstName) ? existingVoucher.FirstName : voucherContext.FirstName;
-               // existingVoucher.LastName = string.IsNullOrEmpty(voucherContext.LastName) ? existingVoucher.LastName : voucherContext.LastName;
-                //existingVoucher.IdNumber = string.IsNullOrEmpty(voucherContext.IdNumber) ? existingVoucher.IdNumber : voucherContext.IdNumber;
-
-              //  _vouchee.UpdateVouchee(existingVoucher);
-                //return Ok($"Voucher with id: {id} was updated successfully");
-            //}
+                _vouchee.UpdateVouchee(existingVouchee);
+                return Ok($"Vouchee with id: {id} was updated successfully");
+            }
             return NotFound($"Vouchee with id: {id} was not found");
         }
 

@@ -41,6 +41,12 @@ namespace DigitalIdentity.App.Business.Managers
             return _sqlServerDb.Vouchees!.ToList();
         }
 
+        public int GetLastVouchee()
+        {
+            return _sqlServerDb.Vouchees.Last().DigitalId + 1;
+            return _sqlServerDb.Vouchees!.Count();
+        }
+
         public Vouchee GetVouchee(Guid id)
         {
             return _sqlServerDb.Vouchees!.Find(id)!;

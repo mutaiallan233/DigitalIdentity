@@ -5,4 +5,10 @@
         Male,
         Female,
     }
+    public enum IdType
+    {
+        passport,
+        nationalid,
+        digitalid
+    }
 }

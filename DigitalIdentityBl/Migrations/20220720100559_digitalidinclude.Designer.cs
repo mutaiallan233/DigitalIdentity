@@ -4,6 +4,7 @@ using DigitalIdentity.Data.Databases.SqlServer.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DigitalIdentity.Data.Migrations
 {
     [DbContext(typeof(SqlServerDb))]
-    partial class SqlServerDbModelSnapshot : ModelSnapshot
+    [Migration("20220720100559_digitalidinclude")]
+    partial class digitalidinclude
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -110,12 +112,10 @@ namespace DigitalIdentity.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FirstName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleName")
                         .HasColumnType("nvarchar(max)");
@@ -130,18 +130,7 @@ namespace DigitalIdentity.Data.Migrations
                     b.Property<string>("Voice")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("VoucherId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("VoucherRefId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("gender")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("VoucherId");
 
                     b.ToTable("Vouchees");
                 });
@@ -153,15 +142,6 @@ namespace DigitalIdentity.Data.Migrations
                         .HasForeignKey("LocationId");
 
                     b.Navigation("Location");
-                });
-
-            modelBuilder.Entity("DigitalIdentityBl.Models.Vouchee", b =>
-                {
-                    b.HasOne("DigitalIdentity.Data.Entities.Voucher", "Voucher")
-                        .WithMany()
-                        .HasForeignKey("VoucherId");
-
-                    b.Navigation("Voucher");
                 });
 #pragma warning restore 612, 618
         }
